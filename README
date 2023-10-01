@@ -1,0 +1,57 @@
+Anton Stefan, 321CC
+                            TEMA2-PA
+
+
+Problema 1: Supercomputer
+
+Pentru prima problema am luat un array dp pe care l-am initializat cu -1, si 
+pe care il folosim pentru a stoca numarul minim de context switchuri, iar in 
+adj am pus fiecare nod si dependentele acestuia. Avem functia min_context_switch 
+care calculeaza numarul minim de context switchuri astfel incat sa ruleze toate taskurile. 
+Iteram recursiv prin toate taskurile dependente de taskul curent, ca sa calculam numarul 
+minim de context swith-uri de care avem nevoie ca secventa tasku-lui curent sa se termine 
+cu una dintre acestea. Daca taskul curent foloseste alt set de date fata de tasku-ul dependent, 
+vom avea nevoie de inca un switch. In final valoarea
+maxima din dp va fi numarul minim de context switchu-ri necesar pentru a rula toate taskurile.
+
+
+Problema 2: Ferate
+
+In problema doi trebuie sa aflam numarul minim de muchii orientate necesare pentru ca 
+dintr-o gara S sa se poata livra catre toate celelalte gari. Astfel am ajuns la algoritmul 
+Kosaraju care foloseste doua DFS-uri. Am contruit graful si graful inversat respectiv, dupa 
+am aplicat dfs pe graful inversat pentru a determina ordinea topologica a nodurilor, dupa 
+aplicam din nou dfs pe ordinea determinata la pasul anterior si pentru fiecare nod nevizitat 
+se marcheaza componenta tare conexa si vedem toate nodurile accesibile din acel nod. 
+Dupa pentru fiecare componenta tare conexa care nu are muchii de intrare din alte componente 
+se construieste o linie ferata catre acea gara. In final verificam daca e vreo linie ferata de 
+intrare catre SCC-ul care contine depozitul principal, daca e afisam rezultatul, daca nu e, 
+depozitul prinicpal reprezinta deja o componenta tare conexa si nu mai e nevoie  de construirea 
+unei linii ferate catrea ea insasi, asa ca afisam cu -1.
+
+
+Problema 3: Teleportare
+
+In problema trei am folosit Dijkstra cu o coada de prioritate. Scopul este de a determina timpul 
+necesar de a ajunge de la nodul 1 la nodul N intr-un graf orientat
+in care exista si scurtaturi(teleportari). Retinem in G graful initial si in teleports teleportarile 
+disponibile. Apelam functia solve care initializeaza vectorul de distante minime dist cu infinit, 
+setam distanta nodului 1 la 0 si adaug nodul unul la coada de prioritate. Dupa in timp ce coada nu 
+este goala, se extrage cel mai prioritar nod, se actulizeaza distantele catre vecinii acestuia si 
+se adauga in coada. Se alege timpul de teleportare cel mai apropriat, se calculeaza timpul umratorului 
+nod destinatie in functie de durata, daca acest timp este mai mic decat cel stocat in matricea dist, se actualizeaza 
+distanta si se aduaga nodul in coada de prioritate. La final afisam distanta minima luand minimul 
+dintre valorile din ultimul rand al matricei dist.
+
+
+Problema 4: Magazin
+
+In aceasta problema am folosit in mare un algoritm DFS la care am retinut timpii pentru fiecare nod in parte. 
+Am construit matricea de adiacenta a grafului. Am aplicat un dfs pentru nodul 1 ca radacina, si am parcurs 
+recursiv ierarhia, atribuind valorilde de timp startTime si endTime fiecarui depozit(nod). Apoi cat timp mai 
+avem intrebari, daca timpul de sfarsit depaseste timpul de sfarsit al depozitului afisam -1, nu se pot efectua 
+E expeditii. Altfel, se parcurge lista de timpi de inceput si se gaseste primul depozit cu timpul de inceput 
+egal cu timpul de sfarsit al expeditiei, si se afiseaza depozitul respectiv.
+
+
+
